@@ -84,6 +84,24 @@ bool test_body_size_reversed()
     return candle.body_size() == 5.0; // |10 - 15| = 5
 }
 
+// 2.5. Тесты для is_red
+bool test_is_red_true()
+{
+    Candle candle(15.0, 20.0, 5.0, 10.0);
+    return candle.is_red(); // Закрытие ниже открытия
+}
+
+bool test_is_red_false()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return !candle.is_red(); // Закрытие выше открытия
+}
+
+bool test_is_red_doji()
+{
+    Candle candle(10.0, 20.0, 5.0, 10.0);
+    return !candle.is_red(); // Доджи (open == close)
+}
 
 void initTests()
 {
@@ -103,6 +121,9 @@ void initTests()
   tests.push_back(test_body_size_equal_open_close);
   tests.push_back(test_body_size_reversed);
 
+  tests.push_back(test_is_red_true);
+  tests.push_back(test_is_red_false);
+  tests.push_back(test_is_red_doji);
 
 }
 
