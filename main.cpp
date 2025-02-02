@@ -88,13 +88,13 @@ bool test_body_size_reversed()
 bool test_is_red_true()
 {
     Candle candle(15.0, 20.0, 5.0, 10.0);
-    return candle.is_red(); // Закрытие ниже открытия
+    return candle.is_red(); // close < open
 }
 
 bool test_is_red_false()
 {
     Candle candle(10.0, 20.0, 5.0, 15.0);
-    return !candle.is_red(); // Закрытие выше открытия
+    return !candle.is_red(); // close > open
 }
 
 bool test_is_red_doji()
@@ -102,6 +102,26 @@ bool test_is_red_doji()
     Candle candle(10.0, 20.0, 5.0, 10.0);
     return !candle.is_red(); // Доджи (open == close)
 }
+
+// 2.6. Тесты для is_green
+bool test_is_green_true()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.is_green(); // close > open
+}
+
+bool test_is_green_false()
+{
+    Candle candle(15.0, 20.0, 5.0, 10.0);
+    return !candle.is_green(); // close < open
+}
+
+bool test_is_green_doji()
+{
+    Candle candle(10.0, 20.0, 5.0, 10.0);
+    return !candle.is_green(); // Доджи (open == close)
+}
+
 
 void initTests()
 {
@@ -125,6 +145,9 @@ void initTests()
   tests.push_back(test_is_red_false);
   tests.push_back(test_is_red_doji);
 
+  tests.push_back(test_is_green_true);
+  tests.push_back(test_is_green_false);
+  tests.push_back(test_is_green_doji);
 }
 
 int launchTests()
