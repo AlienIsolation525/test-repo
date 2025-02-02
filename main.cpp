@@ -27,15 +27,34 @@ bool test_body_contains_outside()
     return !candle.body_contains(5.0); // Вне тела
 }
 
+// 2.2. Тесты для contains
+bool test_contains_inside()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.contains(7.0); // Внутри диапазона
+}
+
+bool test_contains_exact_low()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.contains(5.0); // Равно low
+}
+
+bool test_contains_outside()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return !candle.contains(25.0); // Вне диапазона
+}
+
 void initTests()
 {
   tests.push_back(test_body_contains_inside);
   tests.push_back(test_body_contains_exact_open);
   tests.push_back(test_body_contains_outside);
 
-  //tests.push_back(test4);
-  //tests.push_back(test5);
-  //tests.push_back(test5);
+  tests.push_back(test_contains_inside);
+  tests.push_back(test_contains_exact_low);
+  tests.push_back(test_contains_outside);
 }
 
 int launchTests()
