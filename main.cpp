@@ -65,6 +65,26 @@ bool test_full_size_negative()
     return candle.full_size() == 15.0; // 12 - (-3) = 15
 }
 
+// 2.4. Тесты для body_size
+bool test_body_size_standard()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.body_size() == 5.0; // |15 - 10| = 5
+}
+
+bool test_body_size_equal_open_close()
+{
+    Candle candle(10.0, 20.0, 5.0, 10.0);
+    return candle.body_size() == 0.0; // Тело 0 (доджи)
+}
+
+bool test_body_size_reversed()
+{
+    Candle candle(15.0, 20.0, 5.0, 10.0);
+    return candle.body_size() == 5.0; // |10 - 15| = 5
+}
+
+
 void initTests()
 {
   tests.push_back(test_body_contains_inside);
@@ -78,6 +98,12 @@ void initTests()
   tests.push_back(test_full_size_standard);
   tests.push_back(test_full_size_equal_high_low);
   tests.push_back(test_full_size_negative);
+
+  tests.push_back(test_body_size_standard);
+  tests.push_back(test_body_size_equal_open_close);
+  tests.push_back(test_body_size_reversed);
+
+
 }
 
 int launchTests()
