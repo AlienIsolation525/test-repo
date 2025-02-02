@@ -46,6 +46,25 @@ bool test_contains_outside()
     return !candle.contains(25.0); // Вне диапазона
 }
 
+// 2.3. Тесты для full_size
+bool test_full_size_standard()
+{
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.full_size() == 15.0; // 20 - 5 = 15
+}
+
+bool test_full_size_equal_high_low()
+{
+    Candle candle(10.0, 10.0, 10.0, 10.0);
+    return candle.full_size() == 0.0; // Высота 0
+}
+
+bool test_full_size_negative()
+{
+    Candle candle(5.0, 12.0, -3.0, 10.0);
+    return candle.full_size() == 15.0; // 12 - (-3) = 15
+}
+
 void initTests()
 {
   tests.push_back(test_body_contains_inside);
@@ -55,6 +74,10 @@ void initTests()
   tests.push_back(test_contains_inside);
   tests.push_back(test_contains_exact_low);
   tests.push_back(test_contains_outside);
+
+  tests.push_back(test_full_size_standard);
+  tests.push_back(test_full_size_equal_high_low);
+  tests.push_back(test_full_size_negative);
 }
 
 int launchTests()
