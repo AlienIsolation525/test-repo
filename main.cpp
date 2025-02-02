@@ -8,35 +8,33 @@
 //массив всех тестов, который мы заполняем в функции initTests
 static std::vector<std::function<bool()>> tests;
 
-//тест 1
-bool test1()
+// 2.1. Тесты для body_contains
+bool test_body_contains_inside()
 {
-  //пример какого-то теста
-  return 42 == (41 + 1); //passed
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.body_contains(12.0); // Должно быть внутри тела
 }
 
-//тест 2
-bool test2()
+bool test_body_contains_exact_open()
 {
-  //пример какого-то теста
-  return 42 != (41 + 1); //failed
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return candle.body_contains(10.0); // Равно open
 }
 
-//тест 3
-bool test3()
+bool test_body_contains_outside()
 {
-  Candle candle{ 0.0, 3.0, 3.0, 3.0 };
-
-  //пример какого-то теста
-  return candle.high == 3.0;
+    Candle candle(10.0, 20.0, 5.0, 15.0);
+    return !candle.body_contains(5.0); // Вне тела
 }
 
 void initTests()
 {
-  tests.push_back(test1);
-  tests.push_back(test2);
-  tests.push_back(test3);
+  tests.push_back(test_body_contains_inside);
+  tests.push_back(test_body_contains_exact_open);
+  tests.push_back(test_body_contains_outside);
+
   //tests.push_back(test4);
+  //tests.push_back(test5);
   //tests.push_back(test5);
 }
 
